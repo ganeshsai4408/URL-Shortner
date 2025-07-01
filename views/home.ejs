@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>URL Shortener</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #111;
+            padding: 20px;
+            color: #fff;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            font-weight: 700;
+            color: #ff2e2e;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: #1c1c1c;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(255, 0, 0, 0.2);
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        label {
+            color: #ff5555;
+            font-weight: 600;
+        }
+        input[type="text"] {
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #ff5555;
+            background: #333;
+            color: #fff;
+            font-size: 16px;
+        }
+        input[type="text"]::placeholder {
+            color: #bbb;
+        }
+        button {
+            padding: 10px;
+            background-color: #ff2e2e;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        button:hover {
+            background-color: #cc0000;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 25px;
+        }
+        th, td {
+            padding: 12px;
+            border-bottom: 1px solid #333;
+            text-align: center;
+        }
+        th {
+            background-color: #2a2a2a;
+            color: #ff5555;
+            font-weight: 600;
+        }
+        td a {
+            color: #ff4d4d;
+            text-decoration: none;
+        }
+        .short-url {
+          
+            padding: 8px;
+            border-radius: 8px;
+            font-weight: 600;
+            color: #ff4d4d;
+        }
+        .how-it-works {
+            margin-top: 40px;
+            padding: 20px;
+            background-color: #1a1a1a;
+            border-left: 6px solid #ff2e2e;
+            border-radius: 8px;
+        }
+        .how-it-works h2 {
+            margin-bottom: 15px;
+            font-size: 22px;
+            color: #ff2e2e;
+        }
+        .how-it-works ol {
+            margin-left: 20px;
+            line-height: 1.6;
+        }
+        .url-result {
+            margin: 20px 0;
+            font-size: 18px;
+            font-weight: 600;
+            background: #262626;
+            padding: 10px;
+            border-left: 5px solid #ff2e2e;
+            border-radius: 8px;
+            text-align: center;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔗 URL Shortener</h1>
+
+        <% if (locals.id) { %>
+            <div class="url-result">
+                URL Generated: <a href="http://localhost:8001/url/<%= id %>" target="_blank">http://localhost:8001/url/<%= id %></a>
+            </div>
+        <% } %>
+
+        <form action="/url" method="POST">
+            <label for="url">Enter your original URL:</label>
+            <input type="text" name="url" id="url" placeholder="https://example.com" required />
+            <button type="submit">Generate Short URL</button>
+        </form>
+
+        <% if (locals.urls) { %>
+            <table>
+                <thead>
+                    <tr>
+                        <th>S. No</th>
+                        <th>Short URL</th>
+                        <th>Original URL</th>
+                        <th>Clicks</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% urls.forEach((url, index) => { %>
+                        <tr>
+                            <td><%= index + 1 %></td>
+                            <td class="short-url"><a href="/url/<%= url.shortId %>" target="_blank"><%= url.shortId %></a></td>
+                            <td><a href="<%= url.redirectUrl %>" target="_blank"><%= url.redirectUrl %></a></td>
+                            <td><%= url.visitHistory.length %></td>
+                        </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+        <% } %>
+
+        <div class="how-it-works">
+            <h2>🛠 How It Works</h2>
+            <ol>
+                <li>Type your long URL in the box above.</li>
+                <li>Click that shiny red “Generate” button.</li>
+                <li>BOOM 💥— you get a short URL instantly.</li>
+                <li>Click or share the short URL — it auto-redirects.</li>
+                <li>We even track how many people clicked. Hacker stats 😎.</li>
+            </ol>
+        </div>
+    </div>
+</body>
+</html>
