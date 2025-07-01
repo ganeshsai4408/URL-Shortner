@@ -6,7 +6,8 @@ const staticRouter = require('./routes/staticRouter');
 const { connectToMongoDB } = require('./connect');
 
 const app = express();
-const port = 8001;
+require('dotenv').config();
+const port = process.env.PORT || 10000;
 
 connectToMongoDB("mongodb://127.0.0.1:27017/short-url")
 .then(() => console.log("Connected to MongoDB")).catch((err) => console.error("Failed to connect to MongoDB", err));
