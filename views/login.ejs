@@ -1,20 +1,107 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>login</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #111;
+      padding: 20px;
+      color: #fff;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: auto;
+      background: #1c1c1c;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 5px 20px rgba(255, 0, 0, 0.2);
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 25px;
+      font-weight: 700;
+      color: #ff2e2e;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    label {
+      color: #ff5555;
+      font-weight: 600;
+    }
+
+    input[type="text"],
+    input[type="password"],
+    input[type="email"] {
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid #ff5555;
+      background: #333;
+      color: #fff;
+      font-size: 16px;
+    }
+
+    button {
+      padding: 12px;
+      background-color: #ff2e2e;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #cc0000;
+    }
+
+    .back-link {
+      display: block;
+      margin-bottom: 20px;
+      text-align: center;
+      color: #ff4d4d;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .back-link:hover {
+      text-decoration: underline;
+    }
+  </style>
 </head>
 <body>
-    <h1>login</h1>
-    <form action="/user/login" method="post">
-        
-        
-        <label>email</label>
-        <input type="text" required name="email">
-        <label>password</label>
-        <input type="text" required name="password">
-        <button type="submit">login</button>
+  <div class="container">
+    <a href="/" class="back-link">← Back to URL Shortener</a>
+    <h1>🔐 Login</h1>
+
+    <form action="/user/login" method="POST">
+      <label for="email">Email</label>
+      <input type="email" name="email" id="email" required placeholder="example@email.com" />
+
+      <label for="password">Password</label>
+      <input type="password" name="password" id="password" required placeholder="••••••••" />
+
+      <button type="submit">Login</button>
     </form>
+
+    <a href="/signup" class="back-link">Don’t have an account? Signup here →</a>
+  </div>
 </body>
 </html>
