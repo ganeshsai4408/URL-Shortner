@@ -8,12 +8,13 @@ const userRoute = require('./routes/user');
 const { connectToMongoDB } = require('./connect');
 const cookieParser = require('cookie-parser');
 const {restrictToLoggedinUserOnly} = require('./middleware/auth');
+require('dotenv').config();
 
 const app = express();
 
 const mongoose = require("mongoose");
 
-connectToMongoDB("mongodb://127.0.0.1:27017/short-url")
+connectToMongoDB(process.env.MONGO_URI)
 .then(() => console.log("Connected to MongoDB")).catch((err) => console.error("Failed to connect to MongoDB", err));
 
 
